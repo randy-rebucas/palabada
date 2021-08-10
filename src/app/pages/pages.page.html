@@ -1,0 +1,67 @@
+<ion-split-pane contentId="main-content">
+  <ion-menu contentId="main-content" type="overlay">
+      <ion-content>
+          <ion-list id="inbox-list">
+              <ion-menu-toggle auto-hide="false">
+                  <ng-container *ngIf="user$ | async as user; else elseLoadUser">
+                      <ion-list-header routerDirection="root" [routerLink]="['/pages/profile']" detail>{{user.displayName ? user.displayName : 'no display name'}}</ion-list-header>
+                      <ion-note>{{user.email}}</ion-note>
+                  </ng-container>
+                  <ng-template #elseLoadUser>
+                      <ion-list-header>
+                          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                      </ion-list-header>
+                      <ion-note>
+                          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                      </ion-note>
+                  </ng-template>
+                  <ion-item [routerLink]="['/pages']" routerLinkActive="active" lines="none" detail="false">
+                      <ion-icon slot="start" ios="apps-outline" md="apps-outline"></ion-icon>
+                      <ion-label>Dashboard</ion-label>
+                  </ion-item>
+                  <ion-item [routerLink]="['/pages/collections']" routerLinkActive="active" lines="none" detail="false">
+                      <ion-icon slot="start" ios="briefcase-outline" md="briefcase-outline"></ion-icon>
+                      <ion-label>Collections</ion-label>
+                  </ion-item>
+                  <ion-item [routerLink]="['/pages/breeding-board']" routerLinkActive="active" lines="none" detail="false">
+                      <ion-icon slot="start" ios="calendar-number-outline" md="calendar-number-outline"></ion-icon>
+                      <ion-label>Breeding Board</ion-label>
+                  </ion-item>
+                  <ion-item [routerLink]="['/pages/financials']" routerLinkActive="active" lines="none" detail="false">
+                      <ion-icon slot="start" ios="cash-outline" md="cash-outline"></ion-icon>
+                      <ion-label>Financials</ion-label>
+                  </ion-item>
+                  <!-- <ion-item [routerLink]="['/pages/reports']" routerLinkActive="active" lines="none" detail="false" [disabled]="!canView">
+                      <ion-icon slot="start" ios="reader-outline" md="reader-outline"></ion-icon>
+                      <ion-label>Reports</ion-label>
+                  </ion-item> -->
+                  <ion-item [routerLink]="['/pages/settings']" routerLinkActive="active" lines="none" detail="false">
+                      <ion-icon slot="start" ios="settings-outline" md="settings-outline"></ion-icon>
+                      <ion-label>Settings</ion-label>
+                  </ion-item>
+                  <ion-item [routerLink]="['/pages/help']" routerLinkActive="active" lines="none" detail="false">
+                      <ion-icon slot="start" ios="help-outline" md="help-outline"></ion-icon>
+                      <ion-label>Help</ion-label>
+                  </ion-item>
+                  <ion-item [routerLink]="['/pages/about']" routerLinkActive="active" lines="none" detail="false">
+                      <ion-icon slot="start" ios="information-outline" md="information-outline"></ion-icon>
+                      <ion-label>About</ion-label>
+                  </ion-item>
+                  <ion-item (click)="onLogout()" lines="none" detail="false">
+                      <ion-icon slot="start" ios="power-outline" md="power-outline"></ion-icon>
+                      <ion-label>Logout</ion-label>
+                  </ion-item>
+              </ion-menu-toggle>
+          </ion-list>
+
+          <!-- <ion-list id="labels-list">
+              <ion-list-header>Labels</ion-list-header>
+              <ion-item *ngFor="let label of labels" lines="none">
+                  <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
+                  <ion-label>{{ label }}</ion-label>
+              </ion-item>
+          </ion-list> -->
+      </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-split-pane>
