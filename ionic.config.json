@@ -1,0 +1,7 @@
+{
+  "name": "palabada",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
